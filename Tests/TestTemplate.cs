@@ -1,12 +1,16 @@
 using Xunit;
 using System;
 using System.Collections.Generic;
-using TEMPLATE.Objects;
+using Registrar.Objects;
 
-namespace  TEMPLATE
+namespace  Registrar
 {
   public class TEMPLATE
   {
+    public R()
+    {
+      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=todo_test;Integrated Security=SSPI;";
+    }
     [Fact]
     public void TEMPLATE_true()
     {

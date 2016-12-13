@@ -5,8 +5,13 @@ using Nancy.Owin;
 using Nancy;
 using Nancy.ViewEngines.Razor;
 
-namespace TEMPLATE
+namespace Registrar
 {
+  public static class DBConfiguration
+  {
+    public static string ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=registrar;Integrated Security=SSPI";
+  }
+
   public class Startup
   {
     public void Configure(IApplicationBuilder app)
