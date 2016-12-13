@@ -1,9 +1,9 @@
 using Nancy;
 using System.Collections.Generic;
 using System;
-using TEMPLATE.Objects;
+using Registrar.Objects;
 
-namespace TEMPLATE
+namespace Registrar
 {
   public class HomeModule : NancyModule
   {
