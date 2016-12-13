@@ -114,6 +114,17 @@ namespace Registrar.Objects
       return new Course(name, courseNumber, description, id);
     }
 
+    public List<Student> GetStudents()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open()
+      SqlCommand cmd = new SqlCommand("SELECT students.* FROM courses JOIN courses_students ON (courses.id = courses_students.course_id) JOIN students ON (courses_students.student_id = students.id) WHERE courses.id = @Id;", conn);
+      cmd.Parameters.AddWithValue("@Id", _id);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Student> courseStudents = new List<Student> {}
+    }
+
     public static void DeleteCourse(int id)
     {
       SqlConnection conn = DB.Connection();
@@ -128,7 +139,7 @@ namespace Registrar.Objects
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("DELETE FROM courses;", conn);
+      SqlCommand cmd = new SqlCommand("DELETE FROM courses; DELETE FROM courses_students", conn);
       cmd.ExecuteNonQuery();
       if (conn != null) conn.Close();
     }
