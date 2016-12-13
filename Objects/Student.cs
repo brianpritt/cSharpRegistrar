@@ -44,6 +44,11 @@ namespace Registrar.Objects
       }
     }
 
+    public override int GetHashCode()
+    {
+      return _name.GetHashCode();
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();

@@ -29,6 +29,21 @@ namespace Registrar
       //Arrange
       Assert.Equal(1, studentCourses.Count);
     }
+    [Fact]
+    public void GetStudents_ReturnsAllStudentsInCourse_Equals()
+    {
+      //Arrange
+      DateTime enrollmentDate = new DateTime(2016, 12, 13);
+      Student student1 = new Student("Brian", enrollmentDate);
+      student1.Save();
+      Course course1 = new Course("Cultural Anthropology", "HIST103");
+      course1.Save();
+      //Act
+      student1.AddToCourse(course1.GetId());
+      List<Student> courseStudents = course1.GetStudents(); 
+      //Arrange
+      Assert.Equal(1, courseStudents.Count);
+    }
 
     public void Dispose()
     {

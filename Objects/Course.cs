@@ -51,6 +51,11 @@ namespace Registrar.Objects
       }
     }
 
+    public override int GetHashCode()
+    {
+      return _name.GetHashCode();
+    }
+
     public void Save()
     {
       SqlConnection conn = DB.Connection();
@@ -117,12 +122,25 @@ namespace Registrar.Objects
     public List<Student> GetStudents()
     {
       SqlConnection conn = DB.Connection();
-      conn.Open()
+      conn.Open();
       SqlCommand cmd = new SqlCommand("SELECT students.* FROM courses JOIN courses_students ON (courses.id = courses_students.course_id) JOIN students ON (courses_students.student_id = students.id) WHERE courses.id = @Id;", conn);
       cmd.Parameters.AddWithValue("@Id", _id);
       SqlDataReader rdr = cmd.ExecuteReader();
 
-      List<Student> courseStudents = new List<Student> {}
+      List<Student> courseStudents = new List<Student> {};
+      while(rdr.Read())
+      {
+        int studentId = rdr.GetInt32(0);
+        string studentName = rdr.GetString(1);
+        DateTime studentDate = rdr.GetDateTime(2);
+
+        Student foundStudent = new Student(studentName, studentDate, studentId);
+        courseStudents.Add(foundStudent);
+      }
+
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+      return courseStudents;
     }
 
     public static void DeleteCourse(int id)
