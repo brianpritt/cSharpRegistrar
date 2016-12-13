@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <div class="page-header">
+    <h1>New Student Details</h1>
+  </div>
+  <form action="/students" method="post">
+    <label for="student-name">Student Name</label>
+    <input class="form-control" type="text" name="student-name" placeholder="name" required>
+    <label for="enrollmentDate">Enrollment Date</label>
+    <input class="form-control" type="date" name="date" required>
+    
+    <button type="submit" class="btn btn-primary">Add Student</button>
+  </form>
+  <h4><a href="/students">Return to list of students</a></h4>
+</div>
