@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <div class="page-header">
+    <h1>Courses</h1>
+  </div>
+  <h4><a href="/courses/add_new">Add new course</a></h4>
+  @if (Model.Count == 0)
+  {
+    <p>There are no courses to show.</p>
+  }
+  else
+  {
+    <ul>
+    @foreach (var course in Model)
+    {
+      <li><a href="/courses/@course.GetId()">@course.GetName()</a></li>
+    }
+    </ul>
+  }
+  <h5><a href="/">Home</a></h5>
+</div>

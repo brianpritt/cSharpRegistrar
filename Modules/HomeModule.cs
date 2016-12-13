@@ -45,6 +45,38 @@ namespace Registrar
         List<Student> allStudents = Student.GetAll();
         return View["students.cshtml", allStudents];
       };
+      Get["/courses"] = _ =>
+      {
+        List<Course> allCourses = Course.GetAll();
+        return View["courses.cshtml", allCourses];
+      };
+      Get["/courses/add_new"] = _ =>
+      {
+        List<Student> allStudents = Student.GetAll();
+        return View["new_course.cshtml", allStudents];
+      };
+      Post["/courses"] = _ =>
+      {
+        string name = Request.Form["name"];
+        string number = Request.Form["number"];
+        string description = Request.Form["description"];
+        Course newCourse = new Course(name, number, description);
+        newCourse.Save();
+        List<Course> allCourses = Course.GetAll();
+        return View["courses.cshtml", allCourses];
+      };
+      Get["/courses/{id}"] = parameters =>
+      {
+        Course foundCourse = Course.Find(parameters.id);
+        return View["course.cshtml", foundCourse];
+      };
+      Delete["/courses/remove"] = _ =>
+      {
+        int courseId = int.Parse(Request.Form["course-id"]);
+        Course.DeleteCourse(courseId);
+        List<Course> allCourses = Course.GetAll();
+        return View["courses.cshtml", allCourses];
+      };
     }
   }
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <div class="page-header">
+    <h1>Course Details</h1>
+  </div>
+  <form action="/courses" method="post">
+    <label for="name">Course Name</label>
+    <input class="form-control" type="text" name="name" placeholder="name" required>
+    <label for="number">Course Name</label>
+    <input class="form-control" type="text" name="number" placeholder="course number" required>
+    <label for="description">Course Name</label>
+    <input class="form-control" type="text" name="description" placeholder="course description" required>
+
+    <button type="submit" class="btn btn-primary">Add Course</button>
+  </form>
+  <h4><a href="/courses">Return to list of Courses</a></h4>
+</div>

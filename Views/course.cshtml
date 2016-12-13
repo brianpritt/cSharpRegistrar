@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<div class="container">
+  <div class="page-header">
+    <h1>@Model.GetCourseNumber(): @Model.GetName()</h1>
+  </div>
+  <h3>@Model.GetDescription()</h3>
+  <hr>
+  <h4>Students currently enrolled in @Model.GetName()</h4>
+  <ul>
+    @foreach (var student in Model.GetStudents())
+    {
+      <li><a href="/student/@student.GetId()">@student.GetName()</a></li>
+    }
+  </ul>
+  <h5><a href="/">Home</a></h5>
+  <hr>
+  <form action="/course/remove" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="course-id" value="@Model.GetId()">
+    <button type="submit" class="btn btn-danger">Remove Course</button>
+  </form>
+</div>
