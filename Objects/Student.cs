@@ -141,6 +141,28 @@ namespace Registrar.Objects
       return studentCourses;
     }
 
+    public List<Course> GetAvailableCourses()
+    {
+      List<Course> availableCourses = new List<Course> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("SELECT * FROM courses JOIN courses_students ON courses.id = courses_students.course_id WHERE courses_students.id != @Id;", conn);
+      cmd.Parameters.AddWithValue("@Id", _id);
+      SqlDataReader rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int courseId = rdr.GetInt32(0);
+        string courseName = rdr.GetString(1);
+        string courseNumber = rdr.GetString(2);
+        string courseDescription = rdr.GetString(3);
+        Course foundCourse = new Course(courseName, courseNumber, courseDescription, courseId);
+        availableCourses.Add(foundCourse);
+      }
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+      return availableCourses;
+    }
+
     public static void DeleteStudent(int id)
     {
       SqlConnection conn = DB.Connection();
