@@ -146,7 +146,7 @@ namespace Registrar.Objects
       List<Course> availableCourses = new List<Course> {};
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand("SELECT * FROM courses JOIN courses_students ON courses.id = courses_students.course_id WHERE courses_students.id != @Id;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT * FROM courses JOIN courses_students ON courses.id = courses_students.course_id WHERE courses_students.student_id != @Id;", conn);
       cmd.Parameters.AddWithValue("@Id", _id);
       SqlDataReader rdr = cmd.ExecuteReader();
       while (rdr.Read())
@@ -183,3 +183,4 @@ namespace Registrar.Objects
     }
   }
 }
+//

@@ -42,7 +42,7 @@ namespace Registrar
       Course course2 = new Course("History", "HIST101");
       course2.Save();
       //Act
-      student1.AddToCourse(course1.GetId());
+      student1.AddToCourse(course2.GetId());
       List<Course> studentCourses = student1.GetAvailableCourses();
       Console.WriteLine(studentCourses[0].GetName());
       //Arrange
